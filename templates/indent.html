@@ -1,0 +1,323 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<script src="/static/js/jquery_1.8.js"></script>
+    <script src="/static/js/jquery_cookie.js"></script>
+	<link rel="shortcut icon" href="/static/images/favicon.ico?v=20160901" type="image/x-icon">
+    <link href="/static/css/shopping_cart_new.css" rel="stylesheet" type="text/css">
+	<link href="/static/css/footer_150526.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body style="padding-bottom:82px">
+
+<link href="/static/css/header_960_150611.css" rel="stylesheet" type="text/css">
+<script src="/static/js/pagetop2015_0827.js" charset="gb2312" type="text/javascript"></script>
+
+<div id="hd">
+<div id="tools">
+<div class="tools">
+    <div class="ddnewhead_operate" dd_name="顶链接">
+        
+        <div class="ddnewhead_welcome" display="none;">
+            {% if request.session.email %}
+                <span class="hi hi_none" style="color: #ff2832;">Hi,{{ request.session.email }}</span><a href="{% url 'userApp:exit' %}"> [退出]</a>
+            {% elif request.COOKIES.email %}
+                <span class="hi hi_none" style="color: #ff2832;">Hi,{{ request.COOKIES.email }}</span><a href="{% url 'userApp:exit' %}"> [退出]</a>
+            {% endif %}
+            <div class="tel_pop" style="display:none" id="__ddnav_sjdd" onmouseover="showgaoji('a_phonechannel','__ddnav_sjdd');" onmouseout="hideotherchannel('a_phonechannel','__ddnav_sjdd');">
+                <a target="_blank" href="http://t.dangdang.com/20130220_ydmr" class="title"><i class="icon_tel"></i>手机当当</a><i class="title_shadow"></i>
+                <ul class="tel_pop_box">
+                    <li><a href="http://t.dangdang.com/20130220_ydmr" dd_name="手机二维码"><span>当当手机客户端</span><img src="http://img3.ddimg.cn/00363/doc/erweima2.png"><span class="text">随手查订单<br>随时享优惠</span></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="new_head_znx" id="znx_content" style="display:none;"></div>
+    </div>
+</div>
+</div>
+<div id="header_end"></div>
+<!--CreateDate  2016-09-28 11:30:01--></div>
+<form action="http://search.dangdang.com/search.aspx" id="bootpagetopSearch" name="bootpagetopSearch" method="GET"></form>
+<script type="text/javascript">var nick_num = 0;initHeaderOperate();</script><script type="text/javascript" src="http://orderb.dangdang.com/queryunpaid?callback=Unpaid_Data"></script>
+		<div class="shoppingcart_wrapper" id="ad_cpt_11850"><div><a href="http://a.dangdang.com/tjump.php?q=ddo84XQOf357bOs8tXGg5%2F%2F0oVoDImt3DFWsMqu7ZMSVsfUMeOQJueASNiMLjq%2FdrXMLCKnVfyKEahteAh1ih%2ByKYrKGzhvL20LVbDzObRambBA0YPpivy5hR5foQ4Rt%2BTB" target="_blank" rel="nofollow"><img src="http://img62.ddimg.cn/2017/1/11/2017011111344969879.jpg"></a></div></div>
+<div class="logo_line">
+    <div class="w960">
+        <div class="shopping_procedure01 shopping_procedure "><span>我的购物车</span><span class="current">填写订单</span><span>完成订单</span></div>
+        <div class="logo"><a href="{% url 'DangDang:main' %}"><img src="/static/images/bz_logo_car.jpg" alt=""></a></div>
+    </div>
+</div>
+<div class="indent_con">
+	<div class="shdz">
+    	<h3>收货相关信息</h3>
+        {% csrf_token %}
+        <ul class="shdz_con">
+            <p>▪ 收货地址</p>
+            <li>
+                <label>我的地址：</label>
+                <select id="province_id" name="province_id" style="display: block;">
+                    <option value="0">--请选择--</option>
+                    {% for i in address %}
+                        <option value="{{ i.id }}">{{ i.address }}</option>
+                    {% endfor %}
+                </select>
+            </li>
+        	<li><label><strong>*</strong>收&nbsp;&nbsp;货&nbsp;&nbsp;人：</label><input type="text" name="ship_man" id="inp_ship_man"><span id="spn_ship_man" class="hint new_tip" style="color: red;"></span></li>
+            <li><label><strong>*</strong>收货地址：</label><input type="text" name="ship_address" id="inp_ship_address"><span id="spn_ship_address" class="hint new_tip" style="color: red;"></span></li>
+            <li><label><strong>*</strong>邮政编码：</label><input type="text" name="ship_code" id="inp_ship_code"><span id="spn_ship_code" class="hint new_tip" style="color: red;"></span></li>
+            <li><label><strong>*</strong>手&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;机：</label><input type="text" name="ship_number" id="inp_ship_number"><span id="spn_ship_number" class="hint new_number" style="color: red;"></span></li>
+        </ul>
+        <div class="balance"><p id="p_price">商品金额：¥{{ request.session.cart.total_price }}</p><p class="yfze">应付总额（含运费）：<em id="em_price">¥{{ request.session.cart.total_price }}</em></p><p><a href="javascript:void(0);" onclick="submit();">提交订单</a></p></div>
+    </div>
+    <div class="shdz">
+    	<h3>订单1（百知网配送）</h3>
+        <table width="100%" border="0" cellpadding="0" cellspacing="0">
+            <tbody><tr style="height:30px; line-height:30px;">
+                <th width="34%">商品名称</th>
+                <th width="11%">所在仓库</th>
+                <th width="13%">百知价</th>
+                <th width="11%">促销价</th>
+                <th width="9%">数量</th>
+                <th width="11%">小计</th>
+                <th width="11%">操作</th>
+            </tr>
+            {% for i in request.session.cart.cartItems %}
+            <tr id="tr{{ forloop.counter }}" class="tr_block">
+                <td style="display:none;" id="td_id">{{ i.book.id }}</td>
+                <td style="display:none;" id="td_price">{{ i.total_price }}</td>
+                <td>{{ i.book.name }}</td>
+                <td align="center">{{ i.book.press }}</td>
+                <td align="center">¥{{ i.book.dang_price }}</td>
+                <td align="center">--</td>
+                <td align="center" id="td_amount">{{ i.amount }}</td>
+                <td align="center" id="td{{ forloop.counter }}">¥{{ i.total_price }}</td>
+                <td align="center"><a href="javascript:void(0);" onclick="delItem('{{ forloop.counter }}')">放回购物车</a></td>
+            </tr>
+            {% endfor %}
+             <tr>
+                <td colspan="2"><input type="checkbox" >此订单作为礼品赠送他人</td>
+                <td colspan="2"><strong>运费：</strong>当确认送货方式后显示</td>
+                <td class="table_zj" colspan="3"><strong>小计总额：</strong><em id="em_price1">¥{{ request.session.cart.total_price }}</em></td>
+            </tr></tbody>
+        </table>
+        <script src="/static/js/jquery.1.4.2-min.js"></script>
+        <script>
+            $("#province_id").change(function () {
+                var opt = parseInt($("#province_id").val());
+                $("#spn_ship_man").text("");
+                $("#spn_ship_address").text("");
+                $("#spn_ship_code").text("");
+                $("#spn_ship_number").text("");
+                var iman = $("#inp_ship_man");
+                var iaddress = $("#inp_ship_address");
+                var icode = $("#inp_ship_code");
+                var inumber = $("#inp_ship_number");
+                if(opt == 0){
+                    iman.val("");
+                    iaddress.val("");
+                    icode.val("");
+                    inumber.val("");
+                    iman.removeAttr("disabled");
+                    iaddress.removeAttr("disabled");
+                    icode.removeAttr("disabled");
+                    inumber.removeAttr("disabled");
+                }else {
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("post", "{% url 'orderApp:queryAddress' %}");
+                    var csrftoken = "{{ csrf_token }}";
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                    xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
+                    xhr.onreadystatechange = function(){
+                        if(xhr.readyState==4 && xhr.status==200){
+                            var result = xhr.responseText;
+                            result = eval('('+result+')');
+                            iman.val(result.name);
+                            iaddress.val(result.address);
+                            icode.val(result.code);
+                            inumber.val(result.number);
+                            iman.attr("disabled", "disabled");
+                            iaddress.attr("disabled", "disabled");
+                            icode.attr("disabled", "disabled");
+                            inumber.attr("disabled", "disabled");
+                        }
+                    };
+                    xhr.send("add_id="+opt);
+                }
+            });
+            function submit() {
+                var sman = $("#spn_ship_man");
+                var saddress = $("#spn_ship_address");
+                var scode = $("#spn_ship_code");
+                var snumber = $("#spn_ship_number");
+                var iman = $("#inp_ship_man");
+                var iaddress = $("#inp_ship_address");
+                var icode = $("#inp_ship_code");
+                var inumber = $("#inp_ship_number");
+                sman.text("");
+                saddress.text("");
+                scode.text("");
+                snumber.text("");
+                var a = b = c = d = 1;
+                if(iman.val()==""){
+                    sman.text("请填写收货人姓名");
+                    a = 0;
+                }else {
+                    re = /^[ ]+$/;
+                    if(re.test(iman.val())){
+                        sman.text("请正确填写收货人姓名");
+                        a = 0;
+                    }
+                }
+                if(iaddress.val()==""){
+                    saddress.text("请填写收货地址");
+                    b = 0;
+                }else {
+                    re = /^[ ]+$/;
+                    if(re.test(iaddress.val())){
+                        saddress.text("请正确填写收货地址");
+                        b = 0;
+                    }
+                }
+                if(icode.val()==""){
+                    scode.text("请填写邮政编码");
+                    c = 0;
+                }else{
+                    var re = /^[1-9][0-9]{5}$/;
+                    if(!re.test(icode.val())){
+                        scode.text("请正确填写邮政编码");
+                        c = 0;
+                    }
+                }
+                if(inumber.val()==""){
+                    snumber.text("请填写手机号码");
+                    d = 0;
+                }else{
+                    var re = /^(13[0-9]{9})| (18[0-9]{9}) |(15[89][0-9]{8})$/;
+                    if(!re.test(inumber.val())){
+                        snumber.text("请正确填写手机号码");
+                        d = 0;
+                    }
+                }
+                console.log(a+b+c+d);
+                if(a+b+c+d == 4){
+                    tr_blocks = $(".tr_block");
+                    tr_nones = $(".tr_none");
+                    if(tr_blocks.length == 0){
+                        alert("亲，您没有要下单的商品哟！");
+                    }else {
+                        // 生成订单
+                        // 获取总价 和 地址
+                        total_price = $("#em_price").text();
+                        total_price = total_price.substr(1, total_price.length-1);
+                        address = $("#inp_ship_address").val();
+                        receiver_name = $("#inp_ship_man").val();
+                        number = $("#inp_ship_number").val();
+                        var xhr = new XMLHttpRequest();
+                        xhr.open("post", "{% url 'orderApp:createOrder' %}");
+                        var csrftoken = "{{ csrf_token }}";
+                        xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                        xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
+                        xhr.onreadystatechange = function () {
+                            if(xhr.readyState==4 && xhr.status==200){
+                                // 接收到生成的订单id
+                                var result = xhr.responseText;
+                                // 生成订单项
+                                createItem(result);
+                                // 添加地址
+                                addAddress();
+                                // 跳转到订单提交成功的页面
+                                var total_price = $("#em_price").text();
+                                total_price = total_price.substr(1, total_price.length-1);
+                                location.href = "{% url 'orderApp:access' %}?oid="+result+"&pri="+total_price+"&n="+tr_blocks.length;
+                            }
+                        };
+                        console.log(receiver_name, number);
+                        xhr.send("total_price="+total_price+"&address="+address+"&name="+receiver_name+"&number="+number);
+                    }
+                }
+            }
+            function createItem(n) {
+                tr_blocks = $(".tr_block");
+                tr_nones = $(".tr_none");
+                // 生成订单项
+                for(var i=0; i<tr_blocks.length; i++){
+                    var book_id = tr_blocks.eq(i).children("#td_id").text();
+                    var amount = tr_blocks.eq(i).children("#td_amount").text();
+                    var price = tr_blocks.eq(i).children("#td_price").text();
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("post", "{% url 'orderApp:createItem' %}");
+                    var csrftoken = "{{ csrf_token }}";
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                    xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
+                    xhr.onreadystatechange = function () {
+                        if(xhr.readyState==4 && xhr.status==200){
+                            var result = xhr.responseText;
+                        }
+                    };
+                    xhr.send("order_id="+n+"&book_id="+book_id+"&amount="+amount+"&subtotal="+price);
+                }
+                // 将放回购物车的添加到购物车
+                for(var i=0; i<tr_nones.length; i++){
+                    var book_id = tr_nones.eq(i).children("#td_id").text();
+                    var amount = tr_nones.eq(i).children("#td_amount").text();
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("post", "{% url 'orderApp:addCart' %}");
+                    var csrftoken = "{{ csrf_token }}";
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                    xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
+                    xhr.onreadystatechange = function () {
+                        if(xhr.readyState==4 && xhr.status==200){
+                            var result = xhr.responseText;
+                        }
+                    };
+                    xhr.send("book_id="+book_id+"&amount="+amount);
+                }
+            }
+            function addAddress() {
+                if($("#province_id").val() == '0'){
+                    man = $("#inp_ship_man").val();
+                    address = $("#inp_ship_address").val();
+                    code = $("#inp_ship_code").val();
+                    number = $("#inp_ship_number").val();
+                    var xhr = new XMLHttpRequest();
+                    xhr.open("post", "{% url 'orderApp:addAddress' %}");
+                    var csrftoken = "{{ csrf_token }}";
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                    xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
+                    xhr.onreadystatechange = function () {
+                        if(xhr.readyState==4 && xhr.status==200){
+                            var result = xhr.responseText;
+                        }
+                    };
+                    xhr.send("man="+man+"&address="+address+"&code="+code+"&number="+number);
+                }
+            }
+            function delItem(n) {
+                var tr = $("#tr"+n);
+                tr.css("display", "none");
+                tr.addClass("tr_none");
+                tr.removeClass("tr_block");
+                var price = $("#td"+n).text();
+                var total_price = $("#em_price").text();
+                new_price = (parseFloat(total_price.substr(1, total_price.length-1)) - parseFloat(price.substr(1, price.length-1))).toFixed(2);
+                $("#em_price").text("¥"+new_price);
+                $("#em_price1").text("¥"+new_price);
+                $("#p_price").text("商品金额：¥"+new_price);
+            }
+        </script>
+    </div>
+</div>
+<div id="footer">
+<div class="footer">
+	<div class="footer_nav_box">
+		<div class="footer_copyright"><span>Copyright (C) 当当网 2004-2014, All Rights Reserved</span><a href="http://www.hd315.gov.cn/beian/view.asp?bianhao=010202001051000098" target="_blank" class="footer_img" rel="nofollow"><img src="http://img4.dangdang.com/bottom/validate.gif"></a><span><a href="http://www.miibeian.gov.cn/" target="_blank" rel="nofollow">京ICP证041189号</a></span><span>出版物经营许可证&nbsp;新出发京批字第直0673号</span></div>
+	</div>
+</div>
+</div>
+    <div class="foot_tip_ad">广告</div>
+    <style>
+        .foot_tip_ad { width:40px; height:40px; font:12px/40px "simsun"; text-align:center; color:#fff; background-color:#474747; position:fixed; right:0; bottom:10px;_position:absolute; _bottom:auto;_top:expression(eval(document.documentElement.scrollTop+document.documentElement.clientHeight-this.offsetHeight-(parseInt(this.currentStyle.marginTop,10)||0)-(parseInt(this.currentStyle.marginBottom,10)||0)));}
+    </style>
+</body>
+</html>
